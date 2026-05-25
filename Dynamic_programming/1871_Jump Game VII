@@ -1,0 +1,53 @@
+// class Solution {
+//     public boolean canReach(String s, int minJump, int maxJump) {
+//         int n=s.length()-1;
+//         int i=0,j=i+minJump;
+
+//         while(j<=n && i<=j){
+//             int min=Math.min(i + maxJump, s.length() - 1);
+//             if((i + minJump <= j && j<= min) && s.charAt(j)=='0'){
+//                 int val=condition(j,min,s);
+//                 i=val;
+//                 j=val+1;
+//             }
+//             else{
+//                 j++;
+//             }
+//         }
+//         if(i==n) return true;
+
+//         return false;
+//     }
+//     int condition(int j,int min,String s){
+//         int val=0;
+//         for(int x=j;x<=min;x++){
+//             if(s.charAt(x)=='0'){
+//                 val=x;
+//             }
+//             System.out.print(val+" ");
+//         }
+//         System.out.println();
+//         return val;
+//     }
+// }
+
+class Solution {
+    public boolean canReach(String s, int minJump, int maxJump) {
+        int n=s.length();
+        boolean dp[]=new boolean[n];
+
+        int end=0;
+        dp[0]=true;
+        for(int i=0;i<n;i++){
+            if(dp[i]==false) continue;
+            int st=Math.max(end+1,i + minJump);
+            int en=Math.min(i + maxJump, s.length() - 1);
+
+            for(int k=st;k<=en;k++){
+                if(s.charAt(k)!='1')  dp[k]=true;
+            }
+            end=en;
+        }
+        return dp[n-1];
+    }
+}
