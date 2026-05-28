@@ -1,0 +1,20 @@
+class Solution {
+    public int numberOfSpecialChars(String word) {
+        Set<Character> s=new LinkedHashSet<>();
+        for (char c : word.toCharArray()) {
+            s.add(c);
+        }
+        int count=0;
+        for(char c:s){
+            if(Character.isLowerCase(c)){
+                char ch= Character.toUpperCase(c);
+                if(s.contains(ch)){
+                    if(word.lastIndexOf(c)<word.indexOf(ch)){
+                        count++;
+                    }
+                }
+            }
+        }
+        return count;
+    }
+}
