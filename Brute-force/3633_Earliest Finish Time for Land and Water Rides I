@@ -1,0 +1,33 @@
+class Solution {
+    public int earliestFinishTime(int[] landStartTime, int[] landDuration, int[] waterStartTime, int[] waterDuration) {
+        
+        int min=Integer.MAX_VALUE;
+        int land=landStartTime.length;
+        int water=waterStartTime.length;
+
+        for(int i=0;i<land;i++){
+            int time=0;
+            time=landStartTime[i]+landDuration[i];
+            for(int j=0;j<water;j++){
+                // if(time>=waterStartTime[j]){
+                //     time+=waterDuration[j];
+                // }
+                // else{
+                //     time=waterStartTime;
+                // }
+                int finish=Math.max(time,waterStartTime[j])+waterDuration[j];
+                min=Math.min(min,finish);
+            }
+        }
+
+        for(int i=0;i<water;i++){
+            int time=0;
+            time=waterStartTime[i]+waterDuration[i];
+            for(int j=0;j<land;j++){
+                int finish=Math.max(time,landStartTime[j])+landDuration[j];
+                min=Math.min(min,finish);
+            }
+        }
+        return min;
+    }
+}
