@@ -1,0 +1,20 @@
+class Solution {
+    public int numberOfSubstrings(String s) {
+        int indA=-1,indB=-1,indC=-1;
+        int ans=0;
+
+        for(int i=0;i<s.length();i++){
+            char ch=s.charAt(i);
+
+            if(ch=='a') indA=i;
+            if(ch=='b') indB=i;
+            if(ch=='c') indC=i;
+
+            if(indA!=-1 && indB!=-1 && indC!=-1 ){
+                int min= Math.min(indA,Math.min(indB,indC));
+                ans+=min+1;
+            }
+        }
+        return ans;
+    }
+}
