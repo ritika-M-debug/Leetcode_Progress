@@ -1,0 +1,25 @@
+class Solution {
+    public int maxSubstrings(String word) {
+        List<int[]> list=new ArrayList<>();
+        for(int i=0;i<word.length()-1;i++){
+            for(int j=i+3;j<word.length();j++){
+                if((word.charAt(i)==word.charAt(j))){
+                    list.add(new int[]{i,j});
+                    break;
+                }
+            }
+        }
+        list.sort((a,b)->a[1]-b[1]);
+
+        int sub=0;
+        int lastInd=-1;
+
+        for(int[] pair :list){
+            if(pair[0]>lastInd){
+                sub++;
+                lastInd=pair[1];
+            }
+        }
+        return sub;
+    }
+}
