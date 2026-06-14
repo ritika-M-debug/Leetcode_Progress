@@ -1,0 +1,24 @@
+class Solution {
+    public int maxScore(int[] nums) {
+        Arrays.sort(nums);
+        int n=nums.length;
+        int[] rev=new int[n];
+        for(int i=n-1;i>=0;i--){
+            rev[n-1-i]=nums[i];
+        }
+
+        long[]prefix=new long[n];
+        prefix[0]=(long)rev[0];
+
+        int count=0;
+
+        if(prefix[0]>0) count++;
+        for(int i=1;i<n;i++){
+            prefix[i]=(long)prefix[i-1]+rev[i];
+
+            if(prefix[i]>0) count++;
+        }
+
+        return count;
+    }
+}
