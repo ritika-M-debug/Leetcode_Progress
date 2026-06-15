@@ -1,0 +1,37 @@
+class Solution {
+    public String convert(String s, int n) {
+        if(n==1 || s.length()<=n) return s;
+
+        HashMap<Integer,StringBuilder>map=new HashMap<>();
+	    for(int i=0;i<n;i++){
+	        map.put(i,new StringBuilder());
+	    }
+	    int k=0;
+	    boolean down=true;
+	    for(char ch:s.toCharArray()){
+	        map.put(k,map.get(k).append(ch));
+	        if(down){
+    	        if(k==n-1){
+    	            k--;
+    	            down=false;
+    	            continue;
+    	        }
+    	        k++;
+	        }
+	        else{
+	            if(k==0){
+	                k++;
+	                down=true;
+	                continue;
+	            }
+	            k--;
+	        }
+	    }
+        StringBuilder sb=new StringBuilder();
+        for(int i=0;i<n;i++){
+            sb.append(map.get(i));
+        }
+
+        return sb.toString();
+    }
+}
